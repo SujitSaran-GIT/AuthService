@@ -1,27 +1,27 @@
 services:
-  postgres:
-    image: postgres:17
-    container_name: postgres-db
-    restart: always
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postres
-      POSTGRES_DB: pg_play
-    ports:
-      - "5433:5433"
-    volumes:
-      - pgdata:/var/lib/postgresql/data
+  # postgres:
+  #   image: postgres:17
+  #   container_name: postgres-db
+  #   restart: always
+  #   environment:
+  #     POSTGRES_USER: postgres
+  #     POSTGRES_PASSWORD: postres
+  #     POSTGRES_DB: pg_play
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - pgdata:/var/lib/postgresql/data
   javaapp:
     build: .
     container_name: java-app
-    depends_on:
-      - postgres
+    # depends_on:
+    #   - postgres
     ports:
       - "8081:8081"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5433/pg_play
+      SPRING_DATASOURCE_URL: jdbc:postgresql://69.62.81.203:5433:5432/pg_play
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: postres
 
-volumes:
-  pgdata:
+# volumes:
+#   pgdata:
