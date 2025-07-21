@@ -1,11 +1,14 @@
-# Stage 1: Build the JAR using Maven
-FROM maven:3.9.6-eclipse-temurin-17 AS build
-WORKDIR /app
-COPY . .
-RUN mvn clean package -DskipTests
-
-# Stage 2: Copy the JAR to a minimal Java image
+# Use OpenJDK base image
 FROM openjdk:17-jdk-slim
+
+# Set working directory
 WORKDIR /app
-COPY --from=build /app/target/*.jar app.jar
+
+# Copy the JAR file (change the name according to your JAR)
+COPY target/authservice-0.0.1-SNAPSHOT.jar app.jar
+
+# Expose the port your app runs on
+EXPOSE 8081
+
+# Run the JAR file
 ENTRYPOINT ["java", "-jar", "app.jar"]

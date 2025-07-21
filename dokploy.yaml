@@ -1,0 +1,14 @@
+app:
+  name: authservice
+  port: 8081
+  dockerfile: Dockerfile
+
+services:
+  - name: postgres
+    image: postgres:13
+    env:
+      POSTGRES_DB: pg_play
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5433:5432"
